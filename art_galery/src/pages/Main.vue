@@ -82,6 +82,7 @@ export default {
         border: none;
         align-items: right;
         margin-right: 34px;
+        cursor: pointer;
     }
     .form {
         background-color: #efeeee;
@@ -99,5 +100,6 @@ export default {
         height: 40px;
         width: 80%;
         font-size: 24px;
+        cursor: pointer;
     }
 </style>
