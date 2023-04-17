@@ -11,13 +11,15 @@
     </div>  
     <div v-if="img.length">
         <div v-for="image in images" :key="image.id">
-            <img :src="image.urls.small" :alt="image.alt_description">
+            <img :src="image.urls.small" :alt="image.alt_description" @click="$router.push(`/photo/${image.id}`)">
         </div>
     </div>
     <div v-else class="container">
-        <img class="image" v-for="(image, index) in images" :key="index" :src="image.urls.small" />
+        <img class="image" v-for="(image, index) in images" :key="index" :src="image.urls.small" @click="$router.push(`/photo/${image.id}`)" />
     </div>
 </template>
+
+<!-- @click="goToImagePage(image) -->
 
 <script>
 export default {
@@ -41,9 +43,18 @@ export default {
     methods: {
         async searchImages() {
             try {
-                const response = await fetch(`https://api.unsplash.com/search/photos?query=${this.query}&client_id=EVrA2SgprFyjEdVF51v2bm0LSf7ERPyUll7yFXk8ryk&per_page=9`)
+                const response = await fetch(`https://api.unsplash.com/search/photos?query=${this.query}&client_id=${this.apiKey}&per_page=9`)
                 const data = await response.json()
                 this.images = data.results
+            } catch (error) {
+                console.log(error)
+            }
+        },
+        async goToImagePage(image) {
+            try {
+                const response = await fetch(`https://api.unsplash.com/photos/${image.id}?client_id=${this.apiKey}`)
+                const data = await response.json()
+                window.open(data.links.html, '_blank')
             } catch (error) {
                 console.log(error)
             }

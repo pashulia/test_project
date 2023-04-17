@@ -5,11 +5,16 @@ import {
 
 import Favorites from '@/pages/Favorites';
 import Main from '@/pages/Main';
+import PostIdPage from '@/pages/PostIdPage';
 
 const routes = [
     { 
         path: '/', 
         component: Main
+    },
+    {
+        path: '/photo/:id',
+        component: PostIdPage
     },
     {
         path: '/favorites',
