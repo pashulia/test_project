@@ -5,7 +5,7 @@
             <div class="flex">
                 <strong>{{ selectedImage.user.name }}</strong>
                 <div class="btn_block">
-                    <button class="btn like">
+                    <button class="btn like" @click="likePhoto">
                         <svg width="25" height="23" viewBox="0 0 25 23" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <path d="M18.652 0.118408C15.9926 0.118408 13.7961 2.58857 12.9078 3.75439C12.0195 2.58857 9.82303 0.118408 7.16359 0.118408C3.72082 0.118408 0.919922 3.28368 0.919922 7.17379C0.919922 9.29616 1.76235 11.2741 3.23691 12.6278C3.25835 12.6648 3.28472 12.699 3.31544 12.7297L12.5551 21.9503C12.6527 22.0474 12.78 22.0962 12.9078 22.0962C13.0356 22.0962 13.1634 22.0474 13.261 21.9499L22.808 12.4063L22.9065 12.3107C22.9846 12.237 23.0616 12.1624 23.1479 12.0668C23.184 12.0312 23.2138 11.9912 23.2367 11.9478C24.3074 10.6366 24.8957 8.94542 24.8957 7.17379C24.8957 3.28368 22.0948 0.118408 18.652 0.118408ZM22.4055 11.3858C22.3919 11.402 22.3792 11.419 22.368 11.4366C22.3211 11.4902 22.2699 11.5375 22.2192 11.5858L12.9073 20.8909L4.13544 12.1365C4.10715 12.0809 4.06763 12.0302 4.01935 11.9878C2.68425 10.8219 1.9189 9.06736 1.9189 7.17379C1.9189 3.83437 4.27152 1.11743 7.16359 1.11743C10.023 1.11743 12.4634 4.84706 12.4878 4.88462C12.6722 5.16947 13.1434 5.16947 13.3278 4.88462C13.3522 4.84706 15.7926 1.11743 18.652 1.11743C21.5441 1.11743 23.8967 3.83442 23.8967 7.17379C23.8967 8.74739 23.3669 10.2434 22.4055 11.3858Z" fill="black"/>
                         </svg>
@@ -31,7 +31,7 @@ export default {
     data() {
         return {
             selectedImage: null,
-            apiKey: "EVrA2SgprFyjEdVF51v2bm0LSf7ERPyUll7yFXk8ryk",
+            apiKey: "ybobZiH8a2rXL5phZj8gyu0uEnM54AdXo8aoRtsScjg",
         };
     },
     async mounted() {
@@ -40,6 +40,25 @@ export default {
         );
         this.selectedImage = data;
     },
+    methods: {
+        async likePhoto() {
+            axios.post(
+                `https://api.unsplash.com/photos/${this.$route.params.id}/like`,
+                {},
+                {
+                    headers: {
+                        Authorization: `Client-ID ${this.apiKey}`
+                    }
+                }
+            )
+            .then(response => {
+                console.log("Photo liked successfully!");
+            })
+            .catch(error => {
+                console.error("Error occurred while liking photo:", error);
+            });
+        }
+    }
 };
 </script>
 
