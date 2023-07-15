@@ -25,7 +25,7 @@
 export default {
     data() {
         return {
-            apiKey: "EVrA2SgprFyjEdVF51v2bm0LSf7ERPyUll7yFXk8ryk",
+            apiKey: "ybobZiH8a2rXL5phZj8gyu0uEnM54AdXo8aoRtsScjg",
             query: '',
             images: [],
             img: []
@@ -37,7 +37,6 @@ export default {
             this.apiKey;
         const response = await fetch(url);
         const data = await response.json();
-        console.log(data);
         this.images = data;
     },
     methods: {
